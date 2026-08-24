@@ -1,0 +1,1 @@
+/mnt/Drive E/FINAL_PROJECT/End-to-End-Deep-Learning-Project-Chicken-Disease/artifacts/data_ingestion/Chicken-fecal-images/Healthy/healthy.4.jpg
