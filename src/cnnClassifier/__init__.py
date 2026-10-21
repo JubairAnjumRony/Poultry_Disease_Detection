@@ -2,6 +2,10 @@ import os
 import sys
 import logging
 
+from .gpu import enable_cuda_libs
+
+enable_cuda_libs()
+
 logging_str = "[%(asctime)s: %(levelname)s: %(module)s: %(message)s]"
 
 log_dir = "logs"

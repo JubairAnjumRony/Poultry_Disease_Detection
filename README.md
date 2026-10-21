@@ -42,6 +42,36 @@ pip install -r requirements.txt
 ```
 
 
+### STEP 03- GPU setup (NVIDIA GTX 1650 / CUDA 11.8)
+
+`tensorflow==2.12.0` needs CUDA 11.8 and cuDNN 8.6. On Linux these are installed
+inside the virtualenv from `requirements.txt` (`nvidia-*-cu11` wheels), so no
+system-wide CUDA toolkit is required. The libraries must be added to
+`LD_LIBRARY_PATH` before Python starts; the activation script does this for you:
+
+```bash
+source scripts/activate_gpu.sh
+```
+
+The project also preloads these libraries automatically when `cnnClassifier` is
+imported (`src/cnnClassifier/gpu.py`), so `.venv/bin/python app.py` and
+`.venv/bin/python main.py` use the GPU even without sourcing the activation
+script. Running through the activated venv remains the recommended workflow.
+
+Verify the GPU is visible:
+
+```bash
+python gpu_test.py
+```
+
+The output should contain `PhysicalDevice(name='/physical_device:GPU:0', ...)`
+and `Result device: .../GPU:0`. `python main.py` and `python app.py` will then
+run on the GPU automatically.
+
+> The GTX 1650 has 4 GB of VRAM. The default `BATCH_SIZE: 8` in `params.yaml`
+> is a safe value for the VGG16 model at 224x224.
+
+
 ### Export the environment
 ```bash
 export AWS_ACCESS_KEY_ID="YOUR_ACCESS_KEY_ID""
